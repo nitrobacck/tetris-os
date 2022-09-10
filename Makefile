@@ -1,6 +1,14 @@
-CC=i386-elf-gcc
-ASM=i386-elf-as
-LD=i386-elf-ld
+UNAME := $(shell uname)
+
+ifeq ($(UNAME), Linux)
+	CC = gcc -elf_i386
+	AS = as --32
+	LD = ld -m elf_i386
+else
+	CC = i386-elf-gcc
+	AS = i386-elf-as
+	LD = i386-elf-ld
+endif
 
 GFLAGS=
 CCFLAGS=-m32 -std=c11 -O2 -g -Wall -Wextra -Wpedantic -Wstrict-aliasing
